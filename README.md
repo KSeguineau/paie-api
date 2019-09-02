@@ -10,6 +10,14 @@
 
 #### Information pour l’affichage du formulaire
 
+soit 3 api:
+
+GET "/entreprises"  
+GET "/profils-remuneration"  
+GET "/grades"
+
+soit une api que nous allons détailler:
+
 Nous allons avoir besoin d’un controller EmployeController qui va écouter une requete GET "/referenciels".
 Ce controller va ensuite récuperer la liste des entreprises via la méthode findEntreprises() de la 
 classe EntrepriseService, puis la liste des profils via la méthode findProfils() de la classe ProfilService
