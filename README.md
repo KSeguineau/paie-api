@@ -74,7 +74,7 @@ exemple:
 
 Une méthode de EmployeController va écouter la requete Post "/remuneration-employe" prenant en parametre un employé
 qui va le transmettre au service EmployeService qui va vérifier que les informations sont correctes, si elles le sont
-il va ajouter à la base une RemunerationEmploye, sinon il renvoi une erreur.
+il va ajouter à la base une RemunerationEmploye et renvoyer l’employe au front, sinon il renvoi une erreur.
 
 exemple d’ajout d’employe:
 
