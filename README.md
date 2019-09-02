@@ -13,7 +13,7 @@
 soit 3 api:
 
 GET "/entreprises"  
-GET "/profils-remuneration"  
+GET "/profils_remuneration"  
 GET "/grades"
 
 soit une api que nous allons détailler:
@@ -72,9 +72,14 @@ exemple:
 
 #### Ajout d’un employé
 
-Une méthode de EmployeController va écouter la requete Post "/remuneration-employe" prenant en parametre un employé
+Une méthode de EmployeController va écouter la requete Post "/remuneration_employe" prenant en parametre un employé
 qui va le transmettre au service EmployeService qui va vérifier que les informations sont correctes, si elles le sont
-il va ajouter à la base une RemunerationEmploye et renvoyer l’employe au front, sinon il renvoi une erreur.
+il va ajouter à la base une RemunerationEmploye et renvoyer l’employe au front, sinon il renvoi une erreur.  
+  
+code retour:  
+    ok = 201  
+    erreur=400
+
 
 exemple d’ajout d’employe:
 
