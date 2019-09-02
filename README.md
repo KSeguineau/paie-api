@@ -57,15 +57,21 @@ exemple:
   "grade" : [
       {
         "code": "A",
-        "nom": "Grade A - 20 000€ / an"
+        "nom": "Grade A - 20 000€ / an",
+        "taux_horaire": 12,
+        "nb_heure_mois": 150
       },
       {
         "code": "B",
-        "nom": "Grade B - 30 000€ / an"
+        "nom": "Grade B - 30 000€ / an",
+        "taux_horaire": 15,
+        "nb_heure_mois": 150
       },
       {
         "code": "C",
-        "nom": "Grade C - 40 000€ / an"
+        "nom": "Grade C - 40 000€ / an",
+        "taux_horaire": 18,
+        "nb_heure_mois": 150
       }]
 }
 ```
