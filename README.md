@@ -10,7 +10,7 @@
 
 #### Information pour l’affichage du formulaire
 
-Nous allons avoir besoin d’un controller EmployeController qui va écouter une requete GET "/new-employee".
+Nous allons avoir besoin d’un controller EmployeController qui va écouter une requete GET "/referenciels".
 Ce controller va ensuite récuperer la liste des entreprises via la méthode findEntreprises() de la 
 classe EntrepriseService, puis la liste des profils via la méthode findProfils() de la classe ProfilService
 et récuperer le grade via la méthode findGrade() de la classe GradeService. Le controller va ensuite instancier un 
@@ -64,7 +64,7 @@ exemple:
 
 #### Ajout d’un employé
 
-Une méthode de EmployeController va écouter la requete Post "/new-employee" prenant en parametre un employé
+Une méthode de EmployeController va écouter la requete Post "/remuneration-employe" prenant en parametre un employé
 qui va le transmettre au service EmployeService qui va vérifier que les informations sont correctes, si elles le sont
 il va ajouter à la base une RemunerationEmploye, sinon il renvoi une erreur.
 
