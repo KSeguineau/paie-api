@@ -1,4 +1,8 @@
 package dev.paie.controller;
 
-public class EmployeController {
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
+//TODO
+@RestController
+public class RemunerationEmployeController {
 }
