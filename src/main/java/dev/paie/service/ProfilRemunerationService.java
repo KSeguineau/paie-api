@@ -1,6 +1,7 @@
 package dev.paie.service;
 
 import dev.paie.entites.ProfilRemuneration;
+import dev.paie.exception.ProfilInconnu;
 import dev.paie.repository.ProfilRemunerationEmployeRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,9 @@ public class ProfilRemunerationService {
 
     public List<ProfilRemuneration> findProfilRemuneration(){
         return profilRemunerationEmployeRepository.findAll();
+    }
+
+    public ProfilRemuneration findByCode(String codeProfil) {
+        return profilRemunerationEmployeRepository.findByCode(codeProfil).orElseThrow(ProfilInconnu::new);
     }
 }

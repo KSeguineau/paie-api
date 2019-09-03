@@ -1,12 +1,17 @@
 package dev.paie.entites;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 
 /**
  * The type Remuneration employe.
  */
 @Entity
+@Data
 public class RemunerationEmploye {
 
     /**
@@ -18,6 +23,8 @@ public class RemunerationEmploye {
     /**
      * matricule de l’employe
      */
+    @NotNull
+    @Column(unique = true)
     private String matricule;
 
     /**
@@ -25,20 +32,29 @@ public class RemunerationEmploye {
      */
     @ManyToOne
     @JoinColumn(name = "entreprise_id")
+    @NotNull
     private Entreprise entreprise;
     /**
      * profil de rémuneration de l’employé
      */
     @ManyToOne
     @JoinColumn(name = "profil_remuneration_id")
+    @NotNull
     private ProfilRemuneration profilRemuneration;
     /**
      * grade de l’employé
      */
     @ManyToOne
     @JoinColumn(name = "grade_id")
+    @NotNull
     private Grade grade;
 
+    private ZonedDateTime dateCreation;
+
+    @PrePersist
+    public void dateCreation(){
+        dateCreation = ZonedDateTime.now();
+    }
     /**
      * Gets matricule.
      *

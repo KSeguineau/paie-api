@@ -1,16 +1,67 @@
 package dev.paie.service;
 
+import dev.paie.CollegueConfig;
+import dev.paie.controller.dto.AjoutEmployeDto;
+import dev.paie.controller.dto.RemunerationEmployeDto;
+import dev.paie.entites.RemunerationEmploye;
+import dev.paie.entites.api_collegue_entity.Collegue;
+import dev.paie.exception.MatriculeInconnu;
+import dev.paie.exception.RemunerationEmployeIncomplet;
+import dev.paie.repository.EntrepriseRepository;
 import dev.paie.repository.RemunerationEmployeRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import javax.validation.Validator;
+import java.util.Arrays;
+import java.util.List;
+
 //TODO
 @Service
 public class RemunerationEmployeService {
 
     private RemunerationEmployeRepository remunerationEmployeRepository;
+    private EntrepriseService entrepriseService;
+    private GradeService gradeService;
+    private ProfilRemunerationService profilRemunerationService;
+    private Validator validator;
 
-    public RemunerationEmployeService(RemunerationEmployeRepository remunerationEmployeRepository) {
+    @Value("${urlBase}")
+    private String urlApiCollegue;
+
+    private RestTemplate rt = new RestTemplate();
+
+
+    public RemunerationEmployeService(RemunerationEmployeRepository remunerationEmployeRepository, EntrepriseService entrepriseService, GradeService gradeService, ProfilRemunerationService profilRemunerationService, Validator validator) {
         this.remunerationEmployeRepository = remunerationEmployeRepository;
+        this.entrepriseService = entrepriseService;
+        this.gradeService = gradeService;
+        this.profilRemunerationService = profilRemunerationService;
+        this.validator = validator;
     }
 
+    public RemunerationEmploye ajouterEmploye(AjoutEmployeDto ajoutEmployeDto) {
+        RemunerationEmploye remunerationEmploye = new RemunerationEmploye();
+        Collegue collegue = rt.getForObject(urlApiCollegue + "/collegues/" + ajoutEmployeDto.getMatricule(), Collegue.class, 1);
+        if (collegue != null) {
+            remunerationEmploye.setMatricule(collegue.getMatricule());
+            remunerationEmploye.setEntreprise(entrepriseService.findByCode(ajoutEmployeDto.getCodeEntreprise()));
+            remunerationEmploye.setGrade(gradeService.findByCode(ajoutEmployeDto.getCodeGrade()));
+            remunerationEmploye.setProfilRemuneration(profilRemunerationService.findByCode(ajoutEmployeDto.getCodeProfil()));
 
+            if (validator.validate(remunerationEmploye).isEmpty()) {
+                return remunerationEmployeRepository.save(remunerationEmploye);
+            } else {
+                throw new RemunerationEmployeIncomplet();
+            }
+        } else {
+            throw new MatriculeInconnu();
+        }
+
+    }
+
+    public List<RemunerationEmploye> findRemunerationEmploye() {
+        return remunerationEmployeRepository.findAll();
+    }
 }
