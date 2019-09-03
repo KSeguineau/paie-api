@@ -1,5 +1,6 @@
 package dev.paie.service;
 
+import dev.paie.controller.dto.GradeDto;
 import dev.paie.entites.Grade;
 import dev.paie.exception.GradeInconnuException;
 import dev.paie.repository.GradeRepository;
@@ -16,8 +17,8 @@ public class GradeService {
         this.gradeRepository = gradeRepository;
     }
 
-    public List<Grade> findGrades(){
-       return gradeRepository.findAll();
+    public List<GradeDto> findGrades(){
+       return gradeRepository.findAllGrade();
     }
 
     public Grade findByCode(String codeGrade) {

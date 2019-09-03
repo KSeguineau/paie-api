@@ -1,8 +1,11 @@
 package dev.paie.repository;
 
+import dev.paie.controller.dto.EntrepriseDto;
 import dev.paie.entites.Entreprise;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -10,6 +13,10 @@ import java.util.Optional;
  */
 public interface EntrepriseRepository extends JpaRepository<Entreprise,Integer> {
 
-    public Optional<Entreprise> findByCode(String code);
+     Optional<Entreprise> findByCode(String code);
+
+     @Query("select new EntrepriseDto(e.code,e.denomination) from Entreprise e")
+     List<EntrepriseDto> findAllEntreprise();
+
 
 }

@@ -11,6 +11,9 @@ import java.time.ZonedDateTime;
 /**
  * Represente le bulletin de salaire.
  */
+@Table(uniqueConstraints={
+		@UniqueConstraint(columnNames = {"remuneration_employe_id", "periode_id"})
+})
 @Entity
 @Data
 public class BulletinSalaire {
@@ -25,8 +28,9 @@ public class BulletinSalaire {
     /**
      * Represente la remuneration de l’employe
      */
-	@OneToOne
+	@ManyToOne
 	@NotNull
+		@JoinColumn(name = "remuneration_employe_id")
 	private RemunerationEmploye remunerationEmploye;
 
     /**

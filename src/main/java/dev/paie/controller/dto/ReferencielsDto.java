@@ -18,9 +18,9 @@ public class ReferencielsDto {
     private List<GradeDto> listGradeDto;
     private List<ProfilRemunerationDto> listProfilRemunerationDto;
 
-    public ReferencielsDto(List<Entreprise> entreprises, List<Grade> grades, List<ProfilRemuneration> profilRemunerations) {
-        this.listEntrepriseDto = entreprises.stream().map(EntrepriseDto::new).collect(Collectors.toList());
-        this.listGradeDto = grades.stream().map(GradeDto::new).collect(Collectors.toList());
-        this.listProfilRemunerationDto = profilRemunerations.stream().map(ProfilRemunerationDto::new).collect(Collectors.toList());
+    public ReferencielsDto(List<EntrepriseDto> entreprises, List<GradeDto> grades, List<ProfilRemunerationDto> profilRemunerations) {
+        this.listEntrepriseDto = entreprises;
+        this.listGradeDto = grades;
+        this.listProfilRemunerationDto = profilRemunerations;
     }
 }

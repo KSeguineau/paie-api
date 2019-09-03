@@ -1,4 +1,4 @@
-package dev.paie.controller.dto;
+package dev.paie.controller;
 
 import dev.paie.entites.Periode;
 import dev.paie.service.PeriodeService;
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class PeriodeDto {
+public class PeriodeController {
 
     private PeriodeService periodeService;
 
-    public PeriodeDto(PeriodeService periodeService) {
+    public PeriodeController(PeriodeService periodeService) {
         this.periodeService = periodeService;
     }
 

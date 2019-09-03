@@ -1,5 +1,6 @@
 package dev.paie.service;
 
+import dev.paie.controller.dto.EntrepriseDto;
 import dev.paie.entites.Entreprise;
 import dev.paie.exception.EntrepriseInconnueException;
 import dev.paie.repository.EntrepriseRepository;
@@ -32,8 +33,8 @@ public class EntrepriseService {
      *
      * @return the list
      */
-    public List<Entreprise> findEntreprise() {
-        return entrepriseRepository.findAll();
+    public List<EntrepriseDto> findEntreprise() {
+        return entrepriseRepository.findAllEntreprise();
     }
 
     public Entreprise findByCode(String codeEntreprise) {

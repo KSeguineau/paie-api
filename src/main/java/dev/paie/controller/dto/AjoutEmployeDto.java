@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -11,13 +12,13 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class AjoutEmployeDto {
 
-    @NotNull
+    @NotBlank
     private String matricule;
-    @NotNull
+    @NotBlank
     private String codeEntreprise;
-    @NotNull
+    @NotBlank
     private String codeProfil;
-    @NotNull
+    @NotBlank
     private String codeGrade;
 
 }

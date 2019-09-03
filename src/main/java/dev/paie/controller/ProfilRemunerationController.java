@@ -20,6 +20,6 @@ public class ProfilRemunerationController {
 
     @GetMapping("/profils_remunerations")
     public List<ProfilRemunerationDto> findProfilRemuneration(){
-        return profilRemunerationService.findProfilRemuneration().stream().map(ProfilRemunerationDto::new).collect(Collectors.toList());
+        return profilRemunerationService.findProfilRemuneration();
     }
 }

@@ -20,6 +20,6 @@ public class GradeController {
 
     @GetMapping("/grades")
     public List<GradeDto> findGrade(){
-        return gradeService.findGrades().stream().map(GradeDto::new).collect(Collectors.toList());
+        return gradeService.findGrades();
     }
 }

@@ -1,6 +1,7 @@
 package dev.paie.service;
 
 import dev.paie.controller.dto.AjoutEmployeDto;
+import dev.paie.controller.dto.RemunerationEmployeDto;
 import dev.paie.entites.RemunerationEmploye;
 import dev.paie.entites.api_collegue_entity.Collegue;
 import dev.paie.exception.MatriculeInconnuException;
@@ -57,7 +58,7 @@ public class RemunerationEmployeService {
 
     }
 
-    public List<RemunerationEmploye> findRemunerationEmploye() {
-        return remunerationEmployeRepository.findAll();
+    public List<RemunerationEmployeDto> findRemunerationEmploye() {
+        return remunerationEmployeRepository.findAllRemunerationEmploye();
     }
 }

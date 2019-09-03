@@ -33,7 +33,6 @@ public class EntrepriseController {
      */
     @GetMapping("/entreprises")
     public List<EntrepriseDto> findEntreprise(){
-        List<Entreprise> entreprises = entrepriseService.findEntreprise();
-        return entreprises.stream().map(EntrepriseDto::new).collect(Collectors.toList());
+        return entrepriseService.findEntreprise();
     }
 }

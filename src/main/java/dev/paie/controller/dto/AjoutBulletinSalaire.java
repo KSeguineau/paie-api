@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -14,11 +15,11 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class AjoutBulletinSalaire {
 
-    @NotNull
+    @NotBlank
     private Periode periode;
-    @NotNull
+    @NotBlank
     private String matricule;
-    @NotNull
+    @NotBlank
     private BigDecimal primeExceptionnelle;
 
     /*public BigDecimal getPrimeExceptionnelleBigDecimal() {
