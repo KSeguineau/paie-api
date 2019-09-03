@@ -25,12 +25,17 @@ public class RemunerationEmployeController {
     }
 
     @PostMapping("/remuneration_employe")
-    public RemunerationEmployeDto ajouterEmploye( @RequestBody AjoutEmployeDto ajoutEmployeDto){
+    public RemunerationEmployeDto ajouterEmploye(@Valid @RequestBody AjoutEmployeDto ajoutEmployeDto){
         return new RemunerationEmployeDto(remunerationEmployeService.ajouterEmploye(ajoutEmployeDto));
     }
 
     @GetMapping("/remuneration_employe")
     public List<RemunerationEmployeDto> findRemunerationEmploye(){
         return remunerationEmployeService.findRemunerationEmploye().stream().map(RemunerationEmployeDto::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("/matricules")
+    public List<String> findMatricule(){
+       return remunerationEmployeService.findRemunerationEmploye().stream().map(RemunerationEmploye::getMatricule).collect(Collectors.toList());
     }
 }

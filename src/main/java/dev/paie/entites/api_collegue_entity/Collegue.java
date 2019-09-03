@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class Collegue {
 
     /**

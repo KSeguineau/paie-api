@@ -1,13 +1,18 @@
 package dev.paie.entites;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
 
 /**
  * Represente le bulletin de salaire.
  */
 @Entity
+@Data
 public class BulletinSalaire {
 
     /**
@@ -21,6 +26,7 @@ public class BulletinSalaire {
      * Represente la remuneration de l’employe
      */
 	@OneToOne
+	@NotNull
 	private RemunerationEmploye remunerationEmploye;
 
     /**
@@ -28,6 +34,7 @@ public class BulletinSalaire {
      */
 	@ManyToOne
 	@JoinColumn(name="periode_id")
+	@NotNull
 	private Periode periode;
 
     /**
@@ -35,6 +42,13 @@ public class BulletinSalaire {
      */
 	@Column(precision = 25,scale = 6)
 	private BigDecimal primeExceptionnelle;
+
+	private ZonedDateTime dateCreation;
+
+	@PrePersist
+	public void dateCreation(){
+		dateCreation = ZonedDateTime.now();
+	}
 
     /**
      * Gets remuneration employe.

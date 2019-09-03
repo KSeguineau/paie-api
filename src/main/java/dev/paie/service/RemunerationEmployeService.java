@@ -1,20 +1,16 @@
 package dev.paie.service;
 
-import dev.paie.CollegueConfig;
 import dev.paie.controller.dto.AjoutEmployeDto;
-import dev.paie.controller.dto.RemunerationEmployeDto;
 import dev.paie.entites.RemunerationEmploye;
 import dev.paie.entites.api_collegue_entity.Collegue;
-import dev.paie.exception.MatriculeInconnu;
-import dev.paie.exception.RemunerationEmployeIncomplet;
-import dev.paie.repository.EntrepriseRepository;
+import dev.paie.exception.MatriculeInconnuException;
+import dev.paie.exception.RemunerationEmployeIncompletException;
 import dev.paie.repository.RemunerationEmployeRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Validator;
-import java.util.Arrays;
 import java.util.List;
 
 //TODO
@@ -53,10 +49,10 @@ public class RemunerationEmployeService {
             if (validator.validate(remunerationEmploye).isEmpty()) {
                 return remunerationEmployeRepository.save(remunerationEmploye);
             } else {
-                throw new RemunerationEmployeIncomplet();
+                throw new RemunerationEmployeIncompletException();
             }
         } else {
-            throw new MatriculeInconnu();
+            throw new MatriculeInconnuException();
         }
 
     }

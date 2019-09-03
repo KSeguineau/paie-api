@@ -1,7 +1,7 @@
 package dev.paie.service;
 
 import dev.paie.entites.Grade;
-import dev.paie.exception.GradeInconnu;
+import dev.paie.exception.GradeInconnuException;
 import dev.paie.repository.GradeRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +21,6 @@ public class GradeService {
     }
 
     public Grade findByCode(String codeGrade) {
-        return gradeRepository.findByCode(codeGrade).orElseThrow(GradeInconnu::new);
+        return gradeRepository.findByCode(codeGrade).orElseThrow(GradeInconnuException::new);
     }
 }

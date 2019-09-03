@@ -1,7 +1,7 @@
 package dev.paie.service;
 
 import dev.paie.entites.Entreprise;
-import dev.paie.exception.EntrepriseInconnue;
+import dev.paie.exception.EntrepriseInconnueException;
 import dev.paie.repository.EntrepriseRepository;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +37,6 @@ public class EntrepriseService {
     }
 
     public Entreprise findByCode(String codeEntreprise) {
-        return entrepriseRepository.findByCode(codeEntreprise).orElseThrow(EntrepriseInconnue::new);
+        return entrepriseRepository.findByCode(codeEntreprise).orElseThrow(EntrepriseInconnueException::new);
     }
 }
