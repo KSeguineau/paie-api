@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 
 /**
@@ -49,10 +50,15 @@ public class BulletinSalaire {
 
 	private ZonedDateTime dateCreation;
 
+	private String code;
+
 	@PrePersist
 	public void dateCreation(){
 		dateCreation = ZonedDateTime.now();
 	}
+
+	@PrePersist
+	public void code(){code = UUID.randomUUID().toString();}
 
     /**
      * Gets remuneration employe.

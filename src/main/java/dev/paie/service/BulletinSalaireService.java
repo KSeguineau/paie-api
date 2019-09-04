@@ -1,6 +1,7 @@
 package dev.paie.service;
 
 import dev.paie.controller.dto.AjoutBulletinSalaire;
+import dev.paie.controller.dto.BulletinSansSalaireDto;
 import dev.paie.controller.dto.SalaireDto;
 import dev.paie.entites.BulletinSalaire;
 import dev.paie.entites.Cotisation;
@@ -28,14 +29,14 @@ public class BulletinSalaireService {
         this.validator = validator;
     }
 
-    public BulletinSalaire ajouterBulletinSalaire(AjoutBulletinSalaire ajoutBulletinSalaire) {
+    public BulletinSansSalaireDto ajouterBulletinSalaire(AjoutBulletinSalaire ajoutBulletinSalaire) {
         BulletinSalaire bulletinSalaire = new BulletinSalaire();
         bulletinSalaire.setRemunerationEmploye(remunerationEmployeRepository.findByMatricule(ajoutBulletinSalaire.getMatricule()).orElseThrow(MatriculeInconnuException::new));
         bulletinSalaire.setPeriode(ajoutBulletinSalaire.getPeriode());
         bulletinSalaire.setPrimeExceptionnelle(ajoutBulletinSalaire.getPrimeExceptionnelle());
         if(validator.validate(bulletinSalaire).isEmpty()){
             bulletinSalaireRepository.save(bulletinSalaire);
-            return bulletinSalaire;
+            return new BulletinSansSalaireDto(bulletinSalaire);
         }
         else{
             throw new BulletionSalaireIncompletException();

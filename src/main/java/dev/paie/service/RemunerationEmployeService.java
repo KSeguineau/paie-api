@@ -61,4 +61,8 @@ public class RemunerationEmployeService {
     public List<RemunerationEmployeDto> findRemunerationEmploye() {
         return remunerationEmployeRepository.findAllRemunerationEmploye();
     }
+
+    public List<String> findMatricules(){
+        return remunerationEmployeRepository.findMatricule();
+    }
 }

@@ -34,6 +34,6 @@ public class RemunerationEmployeController {
 
     @GetMapping(params = "matricules")
     public List<String> findMatricule(){
-       return remunerationEmployeService.findRemunerationEmploye().stream().map(RemunerationEmployeDto::getMatricule).collect(Collectors.toList());
+       return remunerationEmployeService.findMatricules();
     }
 }

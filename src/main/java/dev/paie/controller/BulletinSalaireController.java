@@ -2,6 +2,7 @@ package dev.paie.controller;
 
 import dev.paie.controller.dto.AjoutBulletinSalaire;
 import dev.paie.controller.dto.BulletinSalaireDto;
+import dev.paie.controller.dto.BulletinSansSalaireDto;
 import dev.paie.entites.BulletinSalaire;
 import dev.paie.service.BulletinSalaireService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +24,8 @@ public class BulletinSalaireController {
     }
 
     @PostMapping("/bulletin_salaire")
-    public BulletinSalaireDto ajoutBulletinSalaire( @RequestBody AjoutBulletinSalaire ajoutBulletinSalaire){
-        BulletinSalaire bulletinSalaire = bulletinSalaireService.ajouterBulletinSalaire(ajoutBulletinSalaire);
-        return new BulletinSalaireDto(bulletinSalaire,bulletinSalaireService.calculSalaire(bulletinSalaire));
+    public BulletinSansSalaireDto ajoutBulletinSalaire(@RequestBody AjoutBulletinSalaire ajoutBulletinSalaire){
+        return bulletinSalaireService.ajouterBulletinSalaire(ajoutBulletinSalaire);
     }
 
     @GetMapping("/bulletin_salaire")
