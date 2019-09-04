@@ -53,12 +53,12 @@ public class BulletinSalaire {
 	private String code;
 
 	@PrePersist
-	public void dateCreation(){
+	public void prepersist(){
 		dateCreation = ZonedDateTime.now();
+		code = UUID.randomUUID().toString();
 	}
 
-	@PrePersist
-	public void code(){code = UUID.randomUUID().toString();}
+
 
     /**
      * Gets remuneration employe.

@@ -9,7 +9,6 @@ import java.time.ZonedDateTime;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class RemunerationEmployeDto {
 
     private String matricule;
@@ -20,5 +19,11 @@ public class RemunerationEmployeDto {
         this.matricule = remunerationEmploye.getMatricule();
         this.dateCreation = remunerationEmploye.getDateCreation();
         this.gradeCode = remunerationEmploye.getGrade().getCode();
+    }
+
+    public RemunerationEmployeDto(String matricule, ZonedDateTime dateCreation, String gradeCode) {
+        this.matricule = matricule;
+        this.dateCreation = dateCreation;
+        this.gradeCode = gradeCode;
     }
 }

@@ -12,7 +12,7 @@ public interface GradeRepository extends JpaRepository<Grade,Integer> {
 
     Optional<Grade> findByCode(String code);
 
-    @Query("select new GradeDto(g.code,g.tauxBase,g.nbHeuresBase) from Grade g")
+    @Query("select new dev.paie.controller.dto.GradeDto(g.code,g.tauxBase,g.nbHeuresBase) from Grade g")
     List<GradeDto> findAllGrade();
 
 }
