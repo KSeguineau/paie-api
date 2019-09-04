@@ -1,4 +1,8 @@
 # paie-api
+## fichier postman pour utiliser l’api
+
+le fichier "requetes paie-collegue-api.postman_collection.json" se trouvant à la racine du projet contient
+les différentes requetes utilisable pour l’api "paie-api" et "collegue-api"
 
 ## lien heroku:
   lien:[paie-api](https://kseguineau-paie-api.herokuapp.com/entreprises)

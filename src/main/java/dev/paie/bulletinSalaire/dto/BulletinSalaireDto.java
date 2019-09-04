@@ -8,11 +8,17 @@ import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
 
+/**
+ * informations que l’on renvoi apres la creation d’un bulletin de salaire
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class BulletinSalaireDto {
 
+    /**
+     * date de creation de bulletin
+     */
     private ZonedDateTime dateCreation;
     private Periode periode;
     private String matricule;
