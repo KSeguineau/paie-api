@@ -80,7 +80,7 @@ public class BulletinSalaireService {
 
         for(Cotisation cotisation : listeCotisation){
             if(cotisation.getTauxSalarial()!=null&&!cotisation.getImposable()){
-                salaireNetImposable = salaireNetImposable.subtract(salaireBrut.multiply(cotisation.getTauxSalarial()));
+                salaireNetImposable = salaireNetImposable.subtract(salaireBrut.multiply(cotisation.getTauxSalarial()).setScale(2,RoundingMode.HALF_UP));
             }
         }
 
@@ -92,7 +92,7 @@ public class BulletinSalaireService {
         BigDecimal salaireNetAPayer = salaireNetImposable;
         for(Cotisation cotisation : listeCotisation){
             if(cotisation.getTauxSalarial()!=null&&cotisation.getImposable()){
-                salaireNetAPayer = salaireNetAPayer.subtract(salaireBrut.multiply(cotisation.getTauxSalarial()));
+                salaireNetAPayer = salaireNetAPayer.subtract(salaireBrut.multiply(cotisation.getTauxSalarial()).setScale(2,RoundingMode.HALF_UP));
             }
         }
         return salaireNetAPayer.setScale(2, RoundingMode.HALF_UP);
