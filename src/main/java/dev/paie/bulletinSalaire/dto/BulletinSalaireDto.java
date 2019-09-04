@@ -17,15 +17,33 @@ import java.time.ZonedDateTime;
 public class BulletinSalaireDto {
 
     /**
-     * date de creation de bulletin
+     * date de creation du bulletin de salaire
      */
     private ZonedDateTime dateCreation;
+    /**
+     * periode du bulletin de salaire
+     */
     private Periode periode;
+    /**
+     * matricule du collegue
+     */
     private String matricule;
+    /**
+     * code du bulletin de salaire
+     */
     private String code;
+    /**
+     * objet contenant les montants du salaire
+     */
     private SalaireDto salaireDto;
 
 
+    /**
+     * Instantiates a new Bulletin salaire dto.
+     *
+     * @param bulletinSalaire le bulletin de salaire
+     * @param salaireDto      le SalaireDto
+     */
     public BulletinSalaireDto(BulletinSalaire bulletinSalaire, SalaireDto salaireDto) {
         dateCreation=bulletinSalaire.getDateCreation();
         periode= bulletinSalaire.getPeriode();
