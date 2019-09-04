@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "8cb8fb1a-b195-4e1e-8a93-672b3f0d0c55",
-		"name": "requettes paie-collegue-api",
+		"name": "requetes paie-collegue-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -378,6 +378,27 @@
 							],
 							"path": [
 								"bulletin_salaire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recuperationVisualisationPDF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/bulletin_salaire/{code}",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"bulletin_salaire",
+								"{code}"
 							]
 						}
 					},

@@ -3,12 +3,10 @@ package dev.paie.controller;
 import dev.paie.controller.dto.AjoutBulletinSalaire;
 import dev.paie.controller.dto.BulletinSalaireDto;
 import dev.paie.controller.dto.BulletinSansSalaireDto;
+import dev.paie.controller.dto.VisualisationBulletinSalaireDto;
 import dev.paie.entites.BulletinSalaire;
 import dev.paie.service.BulletinSalaireService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -39,5 +37,9 @@ public class BulletinSalaireController {
        return listeBulletinSalaireDto;
     }
 
+    @GetMapping("/bulletin_salaire/{code}")
+    public VisualisationBulletinSalaireDto findVisualisationBulletinSalaire(@PathVariable String code){
+        return bulletinSalaireService.findVisualisationBulletinSalaire( code);
+    }
 
 }
