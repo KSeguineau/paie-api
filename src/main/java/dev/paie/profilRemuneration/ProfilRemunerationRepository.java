@@ -10,6 +10,6 @@ public interface ProfilRemunerationRepository extends JpaRepository<ProfilRemune
 
      Optional<ProfilRemuneration> findByCode(String code);
 
-     @Query("select new dev.paie.controller.dto.ProfilRemunerationDto(p.code) from ProfilRemuneration p")
+     @Query("select new dev.paie.profilRemuneration.ProfilRemunerationDto(p.code) from ProfilRemuneration p")
     List<ProfilRemunerationDto> findAllProfilRemuneration();
 }

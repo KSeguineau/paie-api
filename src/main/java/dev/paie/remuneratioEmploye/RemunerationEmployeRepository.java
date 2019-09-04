@@ -11,7 +11,7 @@ public interface RemunerationEmployeRepository extends JpaRepository<Remuneratio
     public Optional<RemunerationEmploye> findByMatricule(String matricule);
 
 
-    @Query("select new dev.paie.controller.dto.RemunerationEmployeDto(r.matricule,r.dateCreation,r.grade.code) from RemunerationEmploye r")
+    @Query("select new dev.paie.remuneratioEmploye.RemunerationEmployeDto(r.matricule,r.dateCreation,r.grade.code) from RemunerationEmploye r")
     List<RemunerationEmployeDto> findAllRemunerationEmploye();
 
     @Query("select r.matricule from RemunerationEmploye r")
