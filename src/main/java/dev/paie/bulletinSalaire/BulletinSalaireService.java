@@ -1,5 +1,6 @@
 package dev.paie.bulletinSalaire;
 
+import dev.paie.Authentification.CollegueConnecteService;
 import dev.paie.bulletinSalaire.dto.AjoutBulletinSalaireDto;
 import dev.paie.bulletinSalaire.dto.BulletinSansSalaireDto;
 import dev.paie.bulletinSalaire.dto.SalaireDto;
@@ -13,7 +14,9 @@ import dev.paie.remuneratioEmploye.api_collegue_entity.Collegue;
 import dev.paie.profilRemuneration.MatriculeInconnuException;
 
 import dev.paie.remuneratioEmploye.RemunerationEmployeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,7 +33,7 @@ public class BulletinSalaireService {
     private BulletinSalaireRepository bulletinSalaireRepository;
     private RemunerationEmployeRepository remunerationEmployeRepository;
     private Validator validator;
-    RestTemplate rt = new RestTemplate();
+    private RestTemplate rt = new RestTemplate();
     @Value("${urlBase}")
     private String urlApiCollegue;
 
@@ -100,6 +103,10 @@ public class BulletinSalaireService {
 
     public VisualisationBulletinSalaireDto findVisualisationBulletinSalaire(String code){
         BulletinSalaire bulletinSalaire= bulletinSalaireRepository.findByCode(code);
+        String matricule = ((CollegueConnecteService)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMatricule();
+        if(!matricule.equals(bulletinSalaire.getRemunerationEmploye().getMatricule())){
+            throw new AccesInterditException();
+        }
         Entreprise entreprise = bulletinSalaire.getRemunerationEmploye().getEntreprise();
         VisualisationEntreprisDto visualisationEntreprisDto = new VisualisationEntreprisDto(entreprise.getDenomination(),entreprise.getSiret());
 

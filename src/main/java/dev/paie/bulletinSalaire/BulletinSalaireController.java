@@ -1,9 +1,12 @@
 package dev.paie.bulletinSalaire;
 
+import dev.paie.Authentification.CollegueConnecteService;
 import dev.paie.bulletinSalaire.dto.AjoutBulletinSalaireDto;
 import dev.paie.bulletinSalaire.dto.BulletinSalaireDto;
 import dev.paie.bulletinSalaire.dto.BulletinSansSalaireDto;
 import dev.paie.bulletinSalaire.dto.VisualisationBulletinSalaireDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -34,6 +37,7 @@ public class BulletinSalaireController {
        return listeBulletinSalaireDto;
     }
 
+    @Secured("USER")
     @GetMapping("/bulletin_salaire/{code}")
     public VisualisationBulletinSalaireDto findVisualisationBulletinSalaire(@PathVariable String code){
         return bulletinSalaireService.findVisualisationBulletinSalaire( code);
