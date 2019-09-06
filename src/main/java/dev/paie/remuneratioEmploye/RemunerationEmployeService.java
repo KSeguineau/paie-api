@@ -7,10 +7,16 @@ import dev.paie.profilRemuneration.MatriculeInconnuException;
 import dev.paie.grade.GradeService;
 import dev.paie.profilRemuneration.ProfilRemunerationService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.Cookie;
 import javax.validation.Validator;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 
@@ -37,9 +43,10 @@ public class RemunerationEmployeService {
         this.validator = validator;
     }
 
-    public RemunerationEmploye ajouterEmploye(AjoutEmployeDto ajoutEmployeDto) {
+    public RemunerationEmploye ajouterEmploye(AjoutEmployeDto ajoutEmployeDto, Cookie cookie) throws URISyntaxException {
         RemunerationEmploye remunerationEmploye = new RemunerationEmploye();
-        Collegue collegue = rt.getForObject(urlApiCollegue + "/collegues/" + ajoutEmployeDto.getMatricule(), Collegue.class, 1);
+        ResponseEntity<Collegue> responseEntity = rt.exchange(RequestEntity.get(new URI(urlApiCollegue + "/collegues/"+ ajoutEmployeDto.getMatricule())).header(HttpHeaders.SET_COOKIE,cookie.toString()).build(),Collegue.class);
+         Collegue collegue = responseEntity.getBody();
         if (collegue != null) {
             remunerationEmploye.setMatricule(collegue.getMatricule());
             remunerationEmploye.setEntreprise(entrepriseService.findByCode(ajoutEmployeDto.getCodeEntreprise()));
