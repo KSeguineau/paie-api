@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.Cookie;
 import javax.validation.Validator;
+import java.net.HttpCookie;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -29,7 +30,7 @@ public class RemunerationEmployeService {
     private ProfilRemunerationService profilRemunerationService;
     private Validator validator;
 
-    @Value("${urlBase}")
+    @Value("${urlBaseCollegueApi}")
     private String urlApiCollegue;
 
     private RestTemplate rt = new RestTemplate();
@@ -43,9 +44,9 @@ public class RemunerationEmployeService {
         this.validator = validator;
     }
 
-    public RemunerationEmploye ajouterEmploye(AjoutEmployeDto ajoutEmployeDto, Cookie cookie) throws URISyntaxException {
+    public RemunerationEmploye ajouterEmploye(AjoutEmployeDto ajoutEmployeDto, HttpCookie cookie) throws URISyntaxException {
         RemunerationEmploye remunerationEmploye = new RemunerationEmploye();
-        ResponseEntity<Collegue> responseEntity = rt.exchange(RequestEntity.get(new URI(urlApiCollegue + "/collegues/"+ ajoutEmployeDto.getMatricule())).header(HttpHeaders.SET_COOKIE,cookie.toString()).build(),Collegue.class);
+        ResponseEntity<Collegue> responseEntity = rt.exchange(RequestEntity.get(new URI(urlApiCollegue + "/collegues/"+ ajoutEmployeDto.getMatricule())).header(HttpHeaders.COOKIE,cookie.toString()).build(),Collegue.class);
          Collegue collegue = responseEntity.getBody();
         if (collegue != null) {
             remunerationEmploye.setMatricule(collegue.getMatricule());

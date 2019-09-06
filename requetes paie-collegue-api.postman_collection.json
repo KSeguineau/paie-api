@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://kseguineau-collegues-api.herokuapp.com/collegues?nom=bob",
+							"raw": "https://kseguineau-collegues-api.herokuapp.com/collegues?nom=admin",
 							"protocol": "https",
 							"host": [
 								"kseguineau-collegues-api",

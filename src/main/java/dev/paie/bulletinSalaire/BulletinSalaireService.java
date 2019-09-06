@@ -16,6 +16,9 @@ import dev.paie.profilRemuneration.MatriculeInconnuException;
 import dev.paie.remuneratioEmploye.RemunerationEmployeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,6 +26,9 @@ import org.springframework.web.client.RestTemplate;
 import javax.validation.Validator;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.HttpCookie;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +40,7 @@ public class BulletinSalaireService {
     private RemunerationEmployeRepository remunerationEmployeRepository;
     private Validator validator;
     private RestTemplate rt = new RestTemplate();
-    @Value("${urlBase}")
+    @Value("${urlBaseCollegueApi}")
     private String urlApiCollegue;
 
     public BulletinSalaireService(BulletinSalaireRepository bulletinSalaireRepository, RemunerationEmployeRepository remunerationEmployeRepository, Validator validator) {
@@ -101,7 +107,7 @@ public class BulletinSalaireService {
         return salaireNetAPayer.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public VisualisationBulletinSalaireDto findVisualisationBulletinSalaire(String code){
+    public VisualisationBulletinSalaireDto findVisualisationBulletinSalaire(String code, HttpCookie cookie) throws URISyntaxException {
         BulletinSalaire bulletinSalaire= bulletinSalaireRepository.findByCode(code);
         String matricule = ((CollegueConnecteService)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMatricule();
         if(!matricule.equals(bulletinSalaire.getRemunerationEmploye().getMatricule())){
@@ -110,7 +116,9 @@ public class BulletinSalaireService {
         Entreprise entreprise = bulletinSalaire.getRemunerationEmploye().getEntreprise();
         VisualisationEntreprisDto visualisationEntreprisDto = new VisualisationEntreprisDto(entreprise.getDenomination(),entreprise.getSiret());
 
-        Collegue collegue = rt.getForObject(urlApiCollegue+"/collegues/"+bulletinSalaire.getRemunerationEmploye().getMatricule(), Collegue.class, 1);
+        ResponseEntity<Collegue> responseEntity = rt.exchange(RequestEntity.get(new URI(urlApiCollegue + "/collegues/"+ bulletinSalaire.getRemunerationEmploye().getMatricule())).header(HttpHeaders.COOKIE,cookie.toString()).build(),Collegue.class);
+        Collegue collegue = responseEntity.getBody();
+       // Collegue collegue = rt.getForObject(urlApiCollegue+"/collegues/"+bulletinSalaire.getRemunerationEmploye().getMatricule(), Collegue.class, 1);
 
         VisualisationCollegueDto visualisationCollegueDto = new VisualisationCollegueDto(collegue.getMatricule(),collegue.getNom(),collegue.getPrenom(),collegue.getDdn());
 

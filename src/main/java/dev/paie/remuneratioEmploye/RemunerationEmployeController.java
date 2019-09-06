@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.net.HttpCookie;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Stream;
@@ -29,8 +30,13 @@ public class RemunerationEmployeController {
 
     @PostMapping
     public RemunerationEmployeDto ajouterEmploye(@Valid @RequestBody AjoutEmployeDto ajoutEmployeDto, HttpServletRequest req) throws URISyntaxException {
+
         Cookie cookie = Stream.of(req.getCookies()).filter(c -> c.getName().equals(TOKEN_COOKIE)).findFirst().orElseThrow(CookieNonTrouveException::new);
-        return new RemunerationEmployeDto(remunerationEmployeService.ajouterEmploye(ajoutEmployeDto,cookie));
+        HttpCookie httpCookie = new HttpCookie(cookie.getName(),cookie.getValue());
+        httpCookie.setHttpOnly(true);
+        httpCookie.setMaxAge(cookie.getMaxAge());
+        httpCookie.setDomain(cookie.getDomain());
+        return new RemunerationEmployeDto(remunerationEmployeService.ajouterEmploye(ajoutEmployeDto,httpCookie));
     }
 
     @GetMapping
